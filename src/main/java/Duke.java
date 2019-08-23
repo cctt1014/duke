@@ -6,11 +6,8 @@
 import java.util.Scanner;
 
 public class Duke{
-    /**
-     * Main method.
-     */
 
-    private static String[] checkList = new String[100];
+    private static Task[] checkList = new Task[100];
     private static int taskNo = 0;
 
     public static void main(String[] args) {
@@ -37,14 +34,25 @@ public class Duke{
             else if (inputString.equals("list")) {
                 System.out.println("____________________________________________________________\n");
                 for (int i = 1; checkList[i-1] != null; i++){
-                    System.out.println(" " + i + ". " + checkList[i-1] + "\n");
+                    System.out.println(" " + i + "." + checkList[i-1].getStatusIcon() + " "
+                                        + checkList[i-1].description + "\n");
                 }
+                System.out.println("____________________________________________________________\n");
+            }
+            else if(inputString.contains("done")){
+                String temp = inputString.replaceAll("[^0-9]", "");
+                int serialNo = Integer.parseInt(temp);
+                checkList[serialNo-1].markAsDone();
+                System.out.println("____________________________________________________________\n");
+                System.out.println("Nice! I've marked this task as done:\n");
+                System.out.println("   [✓] " + checkList[serialNo-1].description + "\n");
                 System.out.println("____________________________________________________________\n");
             } else {
                 System.out.println("____________________________________________________________\n");
                 System.out.println("     added: " + inputString + "\n");
                 System.out.println("____________________________________________________________\n");
-                checkList[taskNo++] = inputString;
+                Task t = new Task(inputString);
+                checkList[taskNo++] = t;
             }
         }
 
