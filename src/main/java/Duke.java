@@ -25,6 +25,7 @@ public class Duke{
         Scanner scanner = new Scanner(System. in);
         while(scanner.hasNextLine()){
             String inputString = scanner.nextLine();
+
             if (inputString.equals("bye")) {
                 System.out.println("____________________________________________________________\n");
                 System.out.println("     Bye. Hope to see you again soon!\n");
@@ -34,8 +35,7 @@ public class Duke{
             else if (inputString.equals("list")) {
                 System.out.println("____________________________________________________________\n");
                 for (int i = 1; checkList[i-1] != null; i++){
-                    System.out.println(" " + i + "." + checkList[i-1].getStatusIcon() + " "
-                                        + checkList[i-1].description + "\n");
+                    System.out.println(" " + i + "." + checkList[i-1].toString() + "\n");
                 }
                 System.out.println("____________________________________________________________\n");
             }
@@ -48,11 +48,31 @@ public class Duke{
                 System.out.println("   [✓] " + checkList[serialNo-1].description + "\n");
                 System.out.println("____________________________________________________________\n");
             } else {
+                String[] keyword = inputString.split(" ");
+
+                if (keyword[0].equals("deadline")){
+                    String[] getDate = inputString.split("/by ");
+                    Task t = new Deadline(getDate[0].replaceFirst("deadline ", ""),
+                            getDate[getDate.length-1]);
+                    checkList[taskNo++] = t;
+                }
+                else if (keyword[0].equals("event")){
+                    String[] getDate = inputString.split("/at ");
+                    Task t = new Events(getDate[0].replaceFirst("event ", ""),
+                            getDate[getDate.length-1]);
+                    checkList[taskNo++] = t;
+                }
+                else if (keyword[0].equals("todo")){
+                    Task t = new ToDos(inputString.replaceFirst("todo ", ""));
+                    checkList[taskNo++] = t;
+                }
+
                 System.out.println("____________________________________________________________\n");
-                System.out.println("     added: " + inputString + "\n");
+                System.out.println(" Got it. I've added this task: \n");
+                System.out.println("     " + checkList[taskNo-1].toString() + "\n");
+                System.out.println(" Now you have " + taskNo + " tasks in the list.");
                 System.out.println("____________________________________________________________\n");
-                Task t = new Task(inputString);
-                checkList[taskNo++] = t;
+
             }
         }
 
