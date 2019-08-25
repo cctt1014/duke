@@ -40,41 +40,68 @@ public class Duke{
                 System.out.println("____________________________________________________________\n");
             }
             else if(inputString.contains("done")){
-                String temp = inputString.replaceAll("[^0-9]", "");
-                int serialNo = Integer.parseInt(temp);
-                checkList[serialNo-1].markAsDone();
-                System.out.println("____________________________________________________________\n");
-                System.out.println("Nice! I've marked this task as done:\n");
-                System.out.println("   [✓] " + checkList[serialNo-1].description + "\n");
-                System.out.println("____________________________________________________________\n");
+                try {
+                    String temp = inputString.replaceAll("[^0-9]", "");
+                    int serialNo = Integer.parseInt(temp);
+                    if (serialNo >= taskNo){
+                        throw new DukeException("The serial number of the task is Out Of Bounds!");
+                    }
+                    checkList[serialNo - 1].markAsDone();
+                    System.out.println("____________________________________________________________\n");
+                    System.out.println("Nice! I've marked this task as done:\n");
+                    System.out.println("   [✓] " + checkList[serialNo - 1].description + "\n");
+                    System.out.println("____________________________________________________________\n");
+                } catch (DukeException e){
+                    e.printStackTrace();
+                }
             } else {
-                String[] keyword = inputString.split(" ");
+                try {
+                    String[] keyword = inputString.split(" ");
+                    if (!(keyword[0].equals("deadline") || keyword[0].equals("event") || keyword[0].equals("todo"))){
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    }
+                    switch (keyword[0]) {
+                        case "deadline": {
+                            if (inputString.equals("deadline")){
+                                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                            }
+                            String[] getDate = inputString.split("/by ");
+                            Task t = new Deadline(getDate[0].replaceFirst("deadline ", ""),
+                                    getDate[getDate.length - 1]);
+                            checkList[taskNo++] = t;
+                            break;
+                        }
+                        case "event": {
+                            if (inputString.equals("event")){
+                                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+                            }
+                            String[] getDate = inputString.split("/at ");
+                            Task t = new Events(getDate[0].replaceFirst("event ", ""),
+                                    getDate[getDate.length - 1]);
+                            checkList[taskNo++] = t;
+                            break;
+                        }
+                        case "todo": {
+                            if (inputString.equals("todo")){
+                                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                            }
+                            Task t = new ToDos(inputString.replaceFirst("todo ", ""));
+                            checkList[taskNo++] = t;
+                            break;
+                        }
+                    }
 
-                if (keyword[0].equals("deadline")){
-                    String[] getDate = inputString.split("/by ");
-                    Task t = new Deadline(getDate[0].replaceFirst("deadline ", ""),
-                            getDate[getDate.length-1]);
-                    checkList[taskNo++] = t;
-                }
-                else if (keyword[0].equals("event")){
-                    String[] getDate = inputString.split("/at ");
-                    Task t = new Events(getDate[0].replaceFirst("event ", ""),
-                            getDate[getDate.length-1]);
-                    checkList[taskNo++] = t;
-                }
-                else if (keyword[0].equals("todo")){
-                    Task t = new ToDos(inputString.replaceFirst("todo ", ""));
-                    checkList[taskNo++] = t;
+                    System.out.println("____________________________________________________________\n");
+                    System.out.println(" Got it. I've added this task: \n");
+                    System.out.println("     " + checkList[taskNo - 1].toString() + "\n");
+                    System.out.println(" Now you have " + taskNo + " tasks in the list.");
+                    System.out.println("____________________________________________________________\n");
+                } catch (DukeException e){
+                    e.printStackTrace();
                 }
 
-                System.out.println("____________________________________________________________\n");
-                System.out.println(" Got it. I've added this task: \n");
-                System.out.println("     " + checkList[taskNo-1].toString() + "\n");
-                System.out.println(" Now you have " + taskNo + " tasks in the list.");
-                System.out.println("____________________________________________________________\n");
-
-            }
-        }
+            } //else
+        }//while loop
 
     }//main
 
