@@ -1,0 +1,3 @@
+T | 0 | eat
+E | 0 | meet someone | june
+D | 1 | submit the code  | wednesday

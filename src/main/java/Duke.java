@@ -3,6 +3,7 @@
  * @return greeting info.
  */
 
+import java.io.*;
 import java.util.Scanner;
 
 public class Duke{
@@ -21,6 +22,10 @@ public class Duke{
                 "     Hello! I'm Duke\n" +
                 "     What can I do for you?\n" +
                 "____________________________________________________________\n");
+
+        FileControl fileControl = new FileControl();
+        checkList = fileControl.requestTheData();
+        taskNo = fileControl.requestTheTotalNumberofTask();
 
         Scanner scanner = new Scanner(System. in);
         while(scanner.hasNextLine()){
@@ -43,10 +48,11 @@ public class Duke{
                 try {
                     String temp = inputString.replaceAll("[^0-9]", "");
                     int serialNo = Integer.parseInt(temp);
-                    if (serialNo >= taskNo){
+                    if (serialNo > taskNo){
                         throw new DukeException("The serial number of the task is Out Of Bounds!");
                     }
                     checkList[serialNo - 1].markAsDone();
+                    fileControl.requestToWriteTheFile(checkList);
                     System.out.println("____________________________________________________________\n");
                     System.out.println("Nice! I've marked this task as done:\n");
                     System.out.println("   [✓] " + checkList[serialNo - 1].description + "\n");
@@ -90,7 +96,7 @@ public class Duke{
                             break;
                         }
                     }
-
+                    fileControl.requestToWriteTheFile(checkList);
                     System.out.println("____________________________________________________________\n");
                     System.out.println(" Got it. I've added this task: \n");
                     System.out.println("     " + checkList[taskNo - 1].toString() + "\n");
