@@ -1,3 +1,7 @@
 T | 0 | eat
 E | 0 | meet someone | june
 D | 1 | submit the code  | wednesday
+D | 0 | sleep  | 26/8/2019 2204
+D | 0 | haha  | 12/2/2010 1200
+E | 0 | meeting for proj  | 3/3/1000 1300
+E | 0 | have fun  | 12/12/2012 1200

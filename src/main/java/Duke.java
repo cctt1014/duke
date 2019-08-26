@@ -1,15 +1,18 @@
 /**
- * From Chen Tong.
- * @return greeting info.
+ * From Chen Tong. :>
+ * @return greeting info: "Goodnight"
  */
 
-import java.io.*;
+import java.text.ParseException;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Duke{
 
     private static Task[] checkList = new Task[100];
     private static int taskNo = 0;
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -26,6 +29,7 @@ public class Duke{
         FileControl fileControl = new FileControl();
         checkList = fileControl.requestTheData();
         taskNo = fileControl.requestTheTotalNumberofTask();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
 
         Scanner scanner = new Scanner(System. in);
         while(scanner.hasNextLine()){
@@ -72,8 +76,10 @@ public class Duke{
                                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                             }
                             String[] getDate = inputString.split("/by ");
+                            Date date = simpleDateFormat.parse(getDate[getDate.length-1]);
+                            String formattedDate = simpleDateFormat.format(date);
                             Task t = new Deadline(getDate[0].replaceFirst("deadline ", ""),
-                                    getDate[getDate.length - 1]);
+                                    formattedDate);
                             checkList[taskNo++] = t;
                             break;
                         }
@@ -82,8 +88,10 @@ public class Duke{
                                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                             }
                             String[] getDate = inputString.split("/at ");
+                            Date date = simpleDateFormat.parse(getDate[getDate.length-1]);
+                            String formattedDate = simpleDateFormat.format(date);
                             Task t = new Events(getDate[0].replaceFirst("event ", ""),
-                                    getDate[getDate.length - 1]);
+                                    formattedDate);
                             checkList[taskNo++] = t;
                             break;
                         }
@@ -102,7 +110,7 @@ public class Duke{
                     System.out.println("     " + checkList[taskNo - 1].toString() + "\n");
                     System.out.println(" Now you have " + taskNo + " tasks in the list.");
                     System.out.println("____________________________________________________________\n");
-                } catch (DukeException e){
+                } catch (DukeException | ParseException e){
                     e.printStackTrace();
                 }
 

@@ -28,6 +28,9 @@ public class FileControl {
                         t = new Events(info[2], info[3]);
                         break;
                 }
+                if (t.description.equals("default")) {
+                    throw new DukeException("This task is not refreshed.");
+                }
                 if (info[1].equals("1")) {
                     t.markAsDone();
                 }
