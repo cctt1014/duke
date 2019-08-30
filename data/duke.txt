@@ -1,3 +1,5 @@
 T | 0 | eat
 D | 1 | submit the code  | wednesday
 D | 0 | sleep  | 26/8/2019 2204
+T | 0 | code for duke
+D | 0 | eat duke's code  | 12/12/2012 1200

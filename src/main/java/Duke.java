@@ -40,6 +40,22 @@ public class Duke{
                 }
                 System.out.println("____________________________________________________________\n");
             }
+            else if (inputString.contains("find")){
+                try {
+                    if (inputString.equals("find"))
+                        throw new DukeException("OOPS!!! The description of a find cannot be empty.");
+                    String keyword = inputString.split(" ")[1];
+                    int i = 1;
+                    System.out.println("____________________________________________________________\n");
+                    for (Task t : checkList) {
+                        if (t.description.contains(keyword))
+                            System.out.println(" " + i++ + "." + t.toString() + "\n");
+                    }
+                    System.out.println("____________________________________________________________\n");
+                } catch (DukeException e) {
+                    e.printStackTrace();
+                }
+            }
             else if(inputString.contains("done")){
                 try {
                     String temp = inputString.replaceAll("[^0-9]", "");
