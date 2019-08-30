@@ -1,8 +1,9 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class FileControl {
 
-    private static Task[] checkList = new Task[100];
+    private static ArrayList<Task> checkList = new ArrayList<>();
     private static int taskNo = 0;
 
     public FileControl() {
@@ -34,7 +35,8 @@ public class FileControl {
                 if (info[1].equals("1")) {
                     t.markAsDone();
                 }
-                checkList[taskNo++] = t;
+                checkList.add(t);
+                taskNo++;
             }
             bufferedReader.close();
         } catch (IOException | DukeException e) {
@@ -42,7 +44,7 @@ public class FileControl {
         }
     }
 
-    public Task[] requestTheData() {
+    public ArrayList<Task> requestTheData() {
         return checkList;
     }
 
@@ -50,7 +52,7 @@ public class FileControl {
         return taskNo;
     }
 
-    public void requestToWriteTheFile(Task[] taskList) {
+    public void requestToWriteTheFile(ArrayList<Task> taskList) {
         try {
             FileWriter fileWriter = new FileWriter("data/duke.txt");
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
