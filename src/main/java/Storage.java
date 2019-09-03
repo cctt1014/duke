@@ -1,14 +1,17 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class FileControl {
+public class Storage {
 
-    private static ArrayList<Task> checkList = new ArrayList<>();
-    private static int taskNo = 0;
+    private String fileName;
+    public  Storage (String filePath){
+        fileName = filePath;
+    }
 
-    public FileControl() {
+    public ArrayList<Task> load() {
+        ArrayList<Task> checkList = new ArrayList<>();
         try {
-            FileReader fileReader = new FileReader("D:/duke/data/duke.txt");
+            FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -36,25 +39,17 @@ public class FileControl {
                     t.markAsDone();
                 }
                 checkList.add(t);
-                taskNo++;
             }
             bufferedReader.close();
         } catch (IOException | DukeException e) {
             e.printStackTrace();
         }
-    }
-
-    public ArrayList<Task> requestTheData() {
         return checkList;
     }
 
-    public int requestTheTotalNumberofTask() {
-        return taskNo;
-    }
-
-    public void requestToWriteTheFile(ArrayList<Task> taskList) {
+    public void writeTheFile(ArrayList<Task> taskList) {
         try {
-            FileWriter fileWriter = new FileWriter("data/duke.txt");
+            FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write("");
             for (Task t : taskList) {
@@ -86,4 +81,3 @@ public class FileControl {
         }
     }
 }
-

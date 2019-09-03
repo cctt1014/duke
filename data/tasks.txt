@@ -1,0 +1,4 @@
+T | 1 | eat
+D | 0 | sleep  | 26/8/2019 2204
+T | 0 | code for duke
+E | 0 | code jam  | 11/11/2011 1100
