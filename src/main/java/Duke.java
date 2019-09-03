@@ -94,7 +94,7 @@ public class Duke{
                 try {
                     String[] keyword = inputString.split(" ");
                     if (!(keyword[0].equals("deadline") || keyword[0].equals("event") || keyword[0].equals("todo"))){
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
                     }
                     switch (keyword[0]) {
                         case "deadline": {

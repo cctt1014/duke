@@ -8,7 +8,7 @@ public class FileControl {
 
     public FileControl() {
         try {
-            FileReader fileReader = new FileReader("data/duke.txt");
+            FileReader fileReader = new FileReader("D:/duke/data/duke.txt");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
