@@ -1,7 +1,9 @@
+package ControlPanel;
+
 public class DukeException extends Exception{
     DukeException(){}
 
-    DukeException(String errorMsg) {
+    public DukeException(String errorMsg) {
         super(errorMsg);
     }
 

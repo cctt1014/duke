@@ -1,3 +1,7 @@
+package ControlPanel;
+
+import Commands.*;
+
 public class Parser {
     public Parser(){}
 

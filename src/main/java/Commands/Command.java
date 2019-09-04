@@ -1,4 +1,10 @@
+package Commands;
+
+import ControlPanel.*;
+import Tasks.*;
+
 import java.text.ParseException;
+
 
 public abstract class Command {
     public Command(){

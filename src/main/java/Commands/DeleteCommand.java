@@ -1,3 +1,8 @@
+package Commands;
+
+import Tasks.*;
+import ControlPanel.*;
+
 public class DeleteCommand extends Command {
 
     private int serialNo;

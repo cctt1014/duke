@@ -1,5 +1,8 @@
+package ControlPanel;
+
 import java.io.*;
 import java.util.ArrayList;
+import Tasks.*;
 
 public class Storage {
 
@@ -32,7 +35,7 @@ public class Storage {
                         t = new Events(info[2], info[3]);
                         break;
                 }
-                if (t.description.equals("default")) {
+                if (t.getDescription().equals("default")) {
                     throw new DukeException("This task is not refreshed.");
                 }
                 if (info[1].equals("1")) {
@@ -54,24 +57,24 @@ public class Storage {
             bufferedWriter.write("");
             for (Task t : taskList) {
                 if (t instanceof ToDos) {
-                    if (t.isDone)
-                        bufferedWriter.write(t.type + " | 1 | " + t.description + "\n");
+                    if (t.getStatus())
+                        bufferedWriter.write("T | 1 | " + t.getDescription() + "\n");
                     else
-                        bufferedWriter.write(t.type + " | 0 | " + t.description + "\n");
+                        bufferedWriter.write("T | 0 | " + t.getDescription() + "\n");
                 } else if (t instanceof Events) {
-                    if (t.isDone)
-                        bufferedWriter.write(t.type + " | 1 | " + t.description + " | "
-                                + ((Events) t).at + "\n");
+                    if (t.getStatus())
+                        bufferedWriter.write("E | 1 | " + t.getDescription() + " | "
+                                + ((Events) t).getAt() + "\n");
                     else
-                        bufferedWriter.write(t.type + " | 0 | " + t.description + " | "
-                                + ((Events) t).at + "\n");
+                        bufferedWriter.write("E | 0 | " + t.getDescription() + " | "
+                                + ((Events) t).getAt() + "\n");
                 } else if (t instanceof Deadline) {
-                    if (t.isDone)
-                        bufferedWriter.write(t.type + " | 1 | " + t.description + " | "
-                                + ((Deadline) t).by + "\n");
+                    if (t.getStatus())
+                        bufferedWriter.write("D | 1 | " + t.getDescription() + " | "
+                                + ((Deadline) t).getBy() + "\n");
                     else
-                        bufferedWriter.write(t.type + " | 0 | " + t.description + " | "
-                                + ((Deadline) t).by + "\n");
+                        bufferedWriter.write("D | 0 | " + t.getDescription() + " | "
+                                + ((Deadline) t).getBy() + "\n");
 
                 }
             }

@@ -1,3 +1,5 @@
+package ControlPanel;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -25,6 +27,12 @@ public class Ui {
     public String readCommand(){
         return scanner.nextLine();
     }
+
+    public boolean inputStatus(){
+        return scanner.hasNextLine();
+    }
+
+
 
     public void showLine(){
         System.out.println("____________________________________________________________\n");

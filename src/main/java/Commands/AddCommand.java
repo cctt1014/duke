@@ -1,6 +1,10 @@
+package Commands;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import Tasks.*;
+import ControlPanel.*;
 
 public class AddCommand extends Command {
 

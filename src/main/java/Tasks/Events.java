@@ -1,3 +1,5 @@
+package Tasks;
+
 public class Events extends Task{
 
     protected String at;
@@ -11,6 +13,10 @@ public class Events extends Task{
     @Override
     public String toString() {
         return "[E]" + super.toString() + "(at: " + at + ")";
+    }
+
+    public String getAt(){
+        return at;
     }
 
 }
