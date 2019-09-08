@@ -4,13 +4,25 @@ import java.io.*;
 import java.util.ArrayList;
 import Tasks.*;
 
+/**
+ * the class aims to write or read in the file which is saved on local disk
+ */
 public class Storage {
 
     private String fileName;
+
+    /**
+     * the constructor to initialize the storage tool
+     * @param filePath the path of the file which contains the data of the task list
+     */
     public  Storage (String filePath){
         fileName = filePath;
     }
 
+    /**
+     * read in the current data in the local file
+     * @return return the checklist which contains the current data saved on the local disk
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> checkList = new ArrayList<>();
         try {
@@ -50,6 +62,10 @@ public class Storage {
         return checkList;
     }
 
+    /**
+     * the method used to write the file
+     * @param taskList the current checklist
+     */
     public void writeTheFile(ArrayList<Task> taskList) {
         try {
             FileWriter fileWriter = new FileWriter(fileName);

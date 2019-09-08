@@ -2,9 +2,18 @@ package ControlPanel;
 
 import Commands.*;
 
+/**
+ * the class to classify the type of the command
+ */
 public class Parser {
     public Parser(){}
 
+    /**
+     * the method to analyze the input command and classify the type of the command
+     * @param cmd the original text typed in
+     * @return return a command object which has been categorized based on the input command
+     * @throws DukeException if the input command is not valid
+     */
     public static Command parse(String cmd) throws DukeException {
         Command command = null;
         if (cmd.equals("bye")){
@@ -36,8 +45,6 @@ public class Parser {
             }
             command = new AddCommand(keyword, cmd);
         }
-
-
         return command;
     }
 }

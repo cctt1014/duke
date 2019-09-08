@@ -6,23 +6,44 @@ import java.util.Date;
 import Tasks.*;
 import ControlPanel.*;
 
+/**
+ * The command which aims to add a new task to the list
+ */
+
 public class AddCommand extends Command {
 
     private String type;
     private String inputString;
     private SimpleDateFormat simpleDateFormat;
 
+    /**
+     * The constructor to initialize a add command object
+     * @param string the type of the command
+     * @param cmd the content of the original text in input command
+     */
     public AddCommand(String string, String cmd){
         type = string;
         inputString = cmd;
         simpleDateFormat  = new SimpleDateFormat("d/M/yyyy HHmm");
     }
 
+    /**
+     * method to label whether this command means ceasing the overall program
+     * @return whether this command means ceasing the overall program
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * The methods to execute the command based on its type
+     * @param tasks the tasklist object to interact with the checklist
+     * @param ui to print something needed in user interface
+     * @param storage to re-save the data in local disk if necessary
+     * @throws ParseException when there is something wrong with the parsing
+     * @throws DukeException when the command line is not qualified
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ParseException, DukeException {
         switch (type) {

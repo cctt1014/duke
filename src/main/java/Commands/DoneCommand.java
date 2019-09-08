@@ -3,19 +3,37 @@ package Commands;
 import Tasks.*;
 import ControlPanel.*;
 
+/**
+ * The command aims to mark a specific task as done
+ */
 public class DoneCommand extends Command {
 
     private int serialNo;
 
+    /**
+     * the constructor to initialize the done command
+     * @param index the index number of the task which will be marked as done
+     */
     public DoneCommand(int index){
         serialNo = index;
     }
 
+    /**
+     * method to label whether this command means ceasing the overall program
+     * @return whether this command means ceasing the overall program
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * The methods to execute the command based on its type
+     * @param tasks the tasklist object to interact with the checklist
+     * @param ui to print something needed in user interface
+     * @param storage to re-save the data in local disk if necessary
+     * @throws DukeException when the command line is not qualified
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (serialNo > tasks.lengthOfList()) {
